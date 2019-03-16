@@ -26,6 +26,7 @@ aliases:
   - &build_package
     name: build package
     command: |
+      pwd
       npm run build
 
   - &test_with_coverage
