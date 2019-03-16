@@ -26,8 +26,6 @@ aliases:
   - &build_package
     name: build package
     command: |
-      pwd
-      ls -al
       npm run build
 
   - &test_with_coverage
@@ -85,7 +83,7 @@ jobs:
     working_directory: ~/project
     steps:
       - attach_workspace:
-          at: lib
+          at: .
       - run:
           name: "Publish Release on GitHub"
           command: |
