@@ -1,0 +1,42 @@
+aliases:
+  - &install_npm
+    name: install dependencies
+    command: |
+      npm install
+
+  - &defaults
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:8
+
+  - &build_package
+    name: build package
+    command: |
+      npm run build
+
+  - &test_with_coverage
+    name: test
+    command: npm run testWithCoverage
+
+  - &filter_common
+    branches:
+      ignore: gh-pages
+    tags:
+      ignore: /.*/
+
+version: 2
+jobs:
+  node_v8:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: *install_npm
+      - run: *build_package
+      - run: *test_with_coverage
+
+workflows:
+  version: 2
+  dev-builds:
+    jobs:
+      - node_v8:
+          filters: *filter_common
