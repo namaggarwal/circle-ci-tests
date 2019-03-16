@@ -27,6 +27,7 @@ aliases:
     name: build package
     command: |
       pwd
+      ls -al
       npm run build
 
   - &test_with_coverage
@@ -65,7 +66,9 @@ jobs:
       - store_test_results:
           path: coverage
       - persist_to_workspace:
-          root: circle-ci-tests/lib
+          root: .
+          paths:
+            - lib
 
   node_v10:
     docker:
