@@ -1,4 +1,18 @@
 aliases:
+  - &restore_test_cache
+    keys:
+      - test-{{ .Environment.PROJECT_CACHE_VERSION }}-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+
+  - &save_test_cache
+    paths:
+      - ./node_modules
+    key: test-{{ .Environment.PROJECT_CACHE_VERSION }}-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+
+  - &save_test_cache
+    paths:
+      - ./node_modules
+    key: test-{{ .Environment.PROJECT_CACHE_VERSION }}-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+
   - &install_npm
     name: install dependencies
     command: |
@@ -30,7 +44,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore-cache: *restore_test_cache
       - run: *install_npm
+      - save_cache: *save_test_cache
       - run: *build_package
       - run: *test_with_coverage
       - store_test_results:
