@@ -16,7 +16,7 @@ aliases:
 
   - &test_with_coverage
     name: test
-    command: npm run testWithCoverage
+    command: npm run test-with-coverage
 
   - &filter_common
     branches:
