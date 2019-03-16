@@ -108,8 +108,13 @@ workflows:
           filters: *filter_tag_all
       - node_v10:
           filters: *filter_tag_all
-      - publish-github-release:
+      - hold:
+          type: approval
           requires:
             - node_v8
             - node_v10
+          filters: *filter_tag_stable
+      - publish-github-release:
+          requires:
+            - hold
           filters: *filter_tag_stable
