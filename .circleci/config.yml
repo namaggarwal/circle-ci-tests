@@ -63,6 +63,8 @@ jobs:
       - run: *test_with_coverage
       - store_test_results:
           path: coverage
+      - persist_to_workspace:
+          root: lib
 
   node_v10:
     docker:
@@ -76,9 +78,11 @@ jobs:
   publish-github-release:
     docker:
       - image: cibuilds/github:0.10
+    working_directory: ~/project
     steps:
+      - attach_workspace:
+          at: lib
       - run:
-          working_directory: ~/project
           name: "Publish Release on GitHub"
           command: |
             VERSION=${CIRCLE_TAG}
