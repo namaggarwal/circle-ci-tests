@@ -91,7 +91,7 @@ jobs:
             echo "Naman"
             echo ${CIRCLE_TAG}
             echo "Aggarwal"
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete v0.1 ./lib/
+            ghr -t ${GITHUB_TOKEN} v0.1 ./lib/
 
 
 workflows:
