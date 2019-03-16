@@ -64,7 +64,7 @@ jobs:
       - store_test_results:
           path: coverage
       - persist_to_workspace:
-          root: ${CIRCLE_PROJECT_REPONAME}/lib
+          root: circle-ci-tests/lib
 
   node_v10:
     docker:
