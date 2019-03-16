@@ -87,11 +87,7 @@ jobs:
       - run:
           name: "Publish Release on GitHub"
           command: |
-            VERSION=${CIRCLE_TAG}
-            echo "Naman"
-            echo ${CIRCLE_TAG}
-            echo "Aggarwal"
-            ghr -t ${CIRCLE_PROJECT_USERNAME} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete v0.1 ./lib/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete v0.1 ./lib/
 
 
 workflows:
